@@ -18,43 +18,112 @@
     piezas.forEach(function (el) { ojo.observe(el); });
   }
 
-  // 2. Portada: ventas sueltas que Habu ordena en una sola línea. Se apartan del cursor.
+  // 2. Portada: boletas sueltas y desordenadas llegan a Habu, que las endereza,
+  //    las timbra y las deja en fila, parejas, camino al SII. Se apartan del cursor.
   var lienzo = uno("[data-corriente]");
   if (lienzo && lienzo.getContext) {
-    var ctx = lienzo.getContext("2d"), ancho = 0, alto = 0, puntos = [], visible = true;
+    var ctx = lienzo.getContext("2d"), ancho = 0, alto = 0, visible = true;
+    var sueltas = [], enFila = [], porSalir = 0, pulso = 0, puertaX = 0, lineaY = 0, paso = 34, ritmo = 1.15;
     var raton = { x: -999, y: -999 };
-    var nuevo = function (x) {
-      return { x: x, y: Math.random() * alto, y0: Math.random() * alto, v: 0.5 + Math.random() * 1.1, f: Math.random() * 6.28, r: 1.3 + Math.random() * 2 };
+    var TINTA = "11,16,32", FUEGO = "255,74,28";
+    var avion = window.Path2D ? new Path2D("M32 6 40 34 58 48 40 46 36 58H28L24 46 6 48 24 34Z") : null;
+    var punta = window.Path2D ? new Path2D("M32 6 35.5 34H28.5Z") : null;
+
+    var suelta = function (x) {
+      // Nacen arriba o abajo del texto, nunca encima: así el titular se lee limpio.
+      var banda = Math.random() < 0.4 ? 0.05 + Math.random() * 0.15 : 0.73 + Math.random() * 0.22;
+      return { x: x, y: -1, y0: alto * banda, v: 0.55 + Math.random() * 0.9,
+               f: Math.random() * 6.28, giro: Math.random() * 6.28, w: (Math.random() - 0.5) * 0.03,
+               t: 0.8 + Math.random() * 0.5 };
     };
     var medir = function () {
       var r = lienzo.getBoundingClientRect(), d = Math.min(window.devicePixelRatio || 1, 2);
       ancho = r.width; alto = r.height;
       lienzo.width = ancho * d; lienzo.height = alto * d;
       ctx.setTransform(d, 0, 0, d, 0, 0);
-      var cuantos = Math.round(Math.min(150, Math.max(50, ancho / 9)));
-      puntos = [];
-      for (var i = 0; i < cuantos; i++) { puntos.push(nuevo(Math.random() * ancho)); puntos[i].y = -1; }
+      var angosto = ancho < 720;
+      puertaX = ancho * (angosto ? 0.46 : 0.6);
+      lineaY = alto * (angosto ? 0.8 : 0.76);
+      paso = angosto ? 28 : 34;
+      sueltas = []; enFila = []; porSalir = 0;
+      var cuantas = Math.round(Math.min(46, Math.max(16, puertaX / 22)));
+      for (var i = 0; i < cuantas; i++) sueltas.push(suelta(Math.random() * puertaX));
+      for (var x = puertaX + paso; x < ancho + paso; x += paso) enFila.push({ x: x, nace: 1 });
+    };
+    // Una boleta: papel blanco, dos renglones y, si ya pasó por Habu, su timbre.
+    var boleta = function (x, y, giro, tam, opaco, timbrada) {
+      ctx.save();
+      ctx.translate(x, y); ctx.rotate(giro); ctx.scale(tam, tam);
+      ctx.globalAlpha = opaco;
+      ctx.fillStyle = "#fff"; ctx.strokeStyle = "rgba(" + TINTA + "," + (timbrada ? 0.55 : 0.34) + ")"; ctx.lineWidth = 1;
+      ctx.beginPath();
+      if (ctx.roundRect) ctx.roundRect(-6, -8, 12, 16, 1.5); else ctx.rect(-6, -8, 12, 16);
+      ctx.fill(); ctx.stroke();
+      ctx.strokeStyle = "rgba(" + TINTA + ",.3)";
+      ctx.beginPath(); ctx.moveTo(-3, -4); ctx.lineTo(3, -4); ctx.moveTo(-3, -1); ctx.lineTo(1.5, -1); ctx.stroke();
+      if (timbrada) { ctx.fillStyle = "rgb(" + FUEGO + ")"; ctx.fillRect(-3, 2.5, 6, 2.5); }
+      ctx.restore();
+    };
+    var rotulo = function (texto, x, y, alinear, fuerte) {
+      ctx.font = (fuerte ? "700 " : "500 ") + "12px Inter, system-ui, sans-serif";
+      ctx.textAlign = alinear; ctx.fillStyle = "rgba(" + TINTA + "," + (fuerte ? 0.9 : 0.5) + ")";
+      ctx.fillText(texto, x, y);
     };
     var cuadro = function (t) {
       ctx.clearRect(0, 0, ancho, alto);
-      var corte = ancho * 0.5, meta = alto * 0.8;
-      ctx.strokeStyle = "rgba(255,74,28,.9)"; ctx.lineWidth = 1.5;
-      ctx.beginPath(); ctx.moveTo(ancho * 0.86, meta); ctx.lineTo(ancho, meta); ctx.stroke();
-      for (var i = 0; i < puntos.length; i++) {
-        var p = puntos[i];
+      var i, p;
+
+      // La línea ordenada, de Habu al SII.
+      ctx.strokeStyle = "rgba(" + FUEGO + ",.85)"; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.moveTo(puertaX, lineaY); ctx.lineTo(ancho, lineaY); ctx.stroke();
+
+      // Boletas sueltas: llegan a distinto ritmo, giradas, cada una por su lado.
+      var embudo = Math.min(260, puertaX * 0.55);
+      for (i = sueltas.length - 1; i >= 0; i--) {
+        p = sueltas[i];
         p.x += p.v;
-        var k = Math.max(0, Math.min(1, (p.x - corte) / (ancho * 0.36)));
+        var k = Math.max(0, Math.min(1, (p.x - (puertaX - embudo)) / embudo));
         k = k * k * (3 - 2 * k);
-        var libre = p.y0 + Math.sin(t / 1400 + p.f) * 18;
-        var destino = libre + (meta - libre) * k;
+        var libre = p.y0 + Math.sin(t / 1500 + p.f) * 16;
+        var destino = libre + (lineaY - libre) * k;
         if (p.y < 0) p.y = destino;
         var dx = p.x - raton.x, dy = p.y - raton.y, d2 = dx * dx + dy * dy;
-        if (d2 < 16900) destino += (dy >= 0 ? 1 : -1) * (1 - d2 / 16900) * 60 * (1 - k * 0.7);
-        p.y += (destino - p.y) * 0.06;
-        if (p.x > ancho + 10) { puntos[i] = nuevo(-10); continue; }
-        ctx.fillStyle = k > 0.92 ? "rgba(255,74,28,.95)" : "rgba(11,16,32," + (0.16 + k * 0.5) + ")";
-        ctx.beginPath(); ctx.arc(p.x, p.y, p.r * (1 - k * 0.35), 0, 6.283); ctx.fill();
+        if (d2 < 19600) { destino += (dy >= 0 ? 1 : -1) * (1 - d2 / 19600) * 70 * (1 - k); p.giro += 0.04 * (1 - k); }
+        p.y += (destino - p.y) * 0.07;
+        p.giro = (p.giro + p.w) * (1 - k * 0.12);       // Habu la va enderezando
+        if (p.x >= puertaX - 4) { sueltas[i] = suelta(-12); porSalir++; continue; }
+        boleta(p.x, p.y, p.giro, p.t + (1 - p.t) * k, 0.55 + 0.45 * k, false);
       }
+
+      // Habu las suelta de a una, a la misma distancia, ya timbradas.
+      var ultima = enFila.length ? enFila[enFila.length - 1].x : Infinity;
+      if (porSalir > 0 && ultima - puertaX >= paso) { enFila.push({ x: puertaX, nace: 0 }); porSalir--; pulso = 1; }
+      if (porSalir > 6) porSalir = 6;
+      for (i = enFila.length - 1; i >= 0; i--) {
+        p = enFila[i];
+        p.x += ritmo; p.nace = Math.min(1, p.nace + 0.06);
+        if (p.x > ancho + 12) { enFila.splice(i, 1); continue; }
+        boleta(p.x, lineaY - 13, 0, 1, p.nace, true);
+      }
+
+      // Habu, en la puerta.
+      if (pulso > 0.01) {
+        ctx.strokeStyle = "rgba(" + FUEGO + "," + pulso * 0.5 + ")"; ctx.lineWidth = 1.5;
+        ctx.beginPath(); ctx.arc(puertaX, lineaY, 20 + (1 - pulso) * 16, 0, 6.283); ctx.stroke();
+        pulso *= 0.94;
+      }
+      ctx.fillStyle = "#FAFAF7"; ctx.beginPath(); ctx.arc(puertaX, lineaY, 20, 0, 6.283); ctx.fill();
+      ctx.strokeStyle = "rgba(" + TINTA + ",.9)"; ctx.lineWidth = 1.5; ctx.stroke();
+      if (avion) {
+        ctx.save(); ctx.translate(puertaX, lineaY); ctx.rotate(Math.PI / 2); ctx.scale(0.42, 0.42); ctx.translate(-32, -32);
+        ctx.fillStyle = "rgb(" + TINTA + ")"; ctx.fill(avion);
+        ctx.fillStyle = "rgb(" + FUEGO + ")"; ctx.fill(punta);
+        ctx.restore();
+      }
+      rotulo("Habu las ordena", puertaX, lineaY + 40, "center", true);
+      if (ancho >= 720) rotulo("Sus ventas, como vengan", Math.max(20, puertaX - embudo), lineaY + 40, "left", false);
+      rotulo("Al SII", ancho - 20, lineaY + 40, "right", false);
+
       if (visible && !quieto) requestAnimationFrame(cuadro);
     };
     medir();
