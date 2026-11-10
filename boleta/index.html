@@ -4,34 +4,35 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Consultar una boleta — Habu</title>
-<meta name="description" content="Consulte su boleta electrónica emitida con Habu: folio, fecha y monto.">
-<meta name="theme-color" content="#0b0c0e">
+<meta name="description" content="Revise una boleta electrónica emitida con Habu: escriba el folio, la fecha y el monto.">
+<meta name="theme-color" content="#FAFAF7">
+<meta property="og:title" content="Consultar una boleta — Habu">
+<meta property="og:description" content="Revise una boleta electrónica emitida con Habu: escriba el folio, la fecha y el monto.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://habu.cl/boleta/">
 <link rel="canonical" href="https://habu.cl/boleta/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/site.css">
 </head>
 <body>
-
 <header class="cabecera">
   <div class="contenedor">
-    <a class="marca" href="/" aria-label="Habu, inicio">
-      <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 6 40 34 58 48 40 46 36 58H28L24 46 6 48 24 34Z" fill="#f2f0ea"/><path d="M32 6 35.5 34H28.5Z" fill="#ff5a1f"/></svg>
-      HABU
-    </a>
+    <a class="marca" href="/" aria-label="Habu, inicio"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 6 40 34 58 48 40 46 36 58H28L24 46 6 48 24 34Z" fill="currentColor"/><path d="M32 6 35.500 34H28.500Z" fill="#ff4a1c"/></svg>HABU</a>
     <nav class="nav" aria-label="Principal">
-      <a href="/#modulos">Qué hace</a>
-      <a href="/#bitacora">Estado</a>
+      <a href="/#como">Cómo funciona</a>
+      <a href="/#formas">Cómo se usa</a>
+      <a href="/#estado">En qué va</a>
+      <a class="boton" href="/boleta/">Consultar boleta</a>
     </nav>
   </div>
 </header>
 
 <main class="contenedor">
   <div class="hoja">
-    <span class="sello"><i></i> Consulta pública</span>
     <h1>Consultar una boleta</h1>
-    <p>Escriba los datos tal como aparecen en su boleta. Deben coincidir los cuatro.</p>
+    <p>Escriba los datos tal como aparecen en su boleta. Tienen que coincidir los cuatro.</p>
 
-    <p class="aviso" data-aviso>La consulta en línea se habilitará cuando Habu comience a emitir boletas en producción. Por ahora este formulario está en modo de demostración.</p>
+    <p class="aviso" data-aviso>La consulta no está disponible en este momento. Intente más tarde.</p>
 
     <!-- data-servicio: dirección del servicio de consulta (solo lectura). Vacío = formulario deshabilitado. -->
     <form class="formulario" method="post" action="https://boletas.habu.cl/boleta" data-servicio="https://boletas.habu.cl/boleta">
@@ -55,17 +56,17 @@
       <label for="monto">Monto total</label>
       <input id="monto" name="monto" inputmode="numeric" autocomplete="off" placeholder="29.800" required>
 
-      <button class="boton principal" type="submit">Ver mi boleta</button>
+      <button class="boton" type="submit">Ver mi boleta</button>
     </form>
 
-    <p class="ayuda">Habu no guarda datos de quien consulta. Solo se muestran boletas aceptadas por el Servicio de Impuestos Internos. Habu está en certificación: las boletas que existen hoy son de prueba, sin valor tributario.</p>
+    <p class="ayuda">Habu no guarda datos de quien consulta. Solo se muestran boletas recibidas por el Servicio de Impuestos Internos. Habu está en certificación: las boletas que existen hoy son de prueba, sin valor tributario.</p>
   </div>
 </main>
 
 <footer>
   <div class="contenedor">
-    <span>© 2026 Blackbird Tech SpA · Santiago, Chile</span>
-    <span>Habu · motor tributario para puntos de venta</span>
+    <span>© 2026 Blackbird Tech SpA · Santiago de Chile</span>
+    <a href="/boleta/">Consultar una boleta</a>
   </div>
 </footer>
 

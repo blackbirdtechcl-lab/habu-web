@@ -1,4 +1,4 @@
 # habu.cl
 
-Sitio público de Habu, el motor de documentos tributarios electrónicos de Blackbird Tech SpA.
+Sitio público de Habu: boletas, facturas e impuestos al día para negocios que atienden público.
 Estático, sin dependencias. Se publica con GitHub Pages en https://habu.cl

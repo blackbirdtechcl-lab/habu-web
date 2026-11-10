@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Habu — El motor tributario de su punto de venta</title>
-<meta name="description" content="Habu se conecta a su punto de venta: emite boletas y facturas ante el SII, calcula IVA, PPM y el F29, y muestra el negocio en vivo. Hecho en Chile.">
-<meta name="theme-color" content="#0b0c0e">
-<meta property="og:title" content="Habu — El motor tributario de su punto de venta">
-<meta property="og:description" content="Una conexión entre su sistema de ventas y el SII: documentos, impuestos y datos en vivo.">
+<title>Habu — Usted vende. Habu hace los papeles.</title>
+<meta name="description" content="Boletas, facturas e impuestos al día para su negocio. Habu se conecta a su caja o recibe su planilla, y se entiende con el SII por usted.">
+<meta name="theme-color" content="#FAFAF7">
+<meta property="og:title" content="Habu — Usted vende. Habu hace los papeles.">
+<meta property="og:description" content="Boletas, facturas e impuestos al día para su negocio. Habu se conecta a su caja o recibe su planilla, y se entiende con el SII por usted.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://habu.cl/">
 <link rel="canonical" href="https://habu.cl/">
@@ -15,15 +15,13 @@
 <link rel="stylesheet" href="/site.css">
 </head>
 <body>
-
 <header class="cabecera">
   <div class="contenedor">
-    <a class="marca" href="/" aria-label="Habu, inicio"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 6 40 34 58 48 40 46 36 58H28L24 46 6 48 24 34Z" fill="#f2f0ea"/><path d="M32 6 35.5 34H28.5Z" fill="#ff5a1f"/></svg>HABU</a>
+    <a class="marca" href="/" aria-label="Habu, inicio"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 6 40 34 58 48 40 46 36 58H28L24 46 6 48 24 34Z" fill="currentColor"/><path d="M32 6 35.500 34H28.500Z" fill="#ff4a1c"/></svg>HABU</a>
     <nav class="nav" aria-label="Principal">
-      <a href="#acople">Qué es</a>
-      <a href="#modulos">Módulos</a>
-      <a href="#quien">Para quién</a>
-      <a href="#bitacora">Estado</a>
+      <a href="/#como">Cómo funciona</a>
+      <a href="/#formas">Cómo se usa</a>
+      <a href="/#estado">En qué va</a>
       <a class="boton" href="/boleta/">Consultar boleta</a>
     </nav>
   </div>
@@ -31,138 +29,107 @@
 
 <main>
 
-<section class="portada" style="padding:0">
-  <div class="rejilla" aria-hidden="true"></div>
+<section class="portada">
+  <canvas class="corriente" data-corriente aria-hidden="true"></canvas>
   <div class="contenedor">
-    <div>
-      <span class="sello"><i></i> En certificación ante el SII</span>
-      <h1>Su sistema vende. <em>Habu</em> se entiende con el SII.</h1>
-      <p class="bajada">Habu es el motor tributario que se acopla a su punto de venta: emite cada documento, lleva la cuenta de sus impuestos y le muestra el negocio en vivo.</p>
-      <div class="acciones">
-        <a class="boton principal" href="#modulos">Ver qué hace <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        <a class="boton" href="#bitacora">En qué etapa está</a>
+    <h1>Usted vende.<br>Habu hace <i>los papeles.</i></h1>
+    <p class="bajada">Boletas, facturas e impuestos al día. Sin planillas a medianoche y sin tener que pensar en el SII.</p>
+    <a class="boton" href="#como">Ver cómo funciona</a>
+  </div>
+  <p class="pista" aria-hidden="true">Mueva el cursor · baje para seguir</p>
+</section>
+
+<section class="historia" id="como" data-historia data-paso="0">
+  <div class="escena">
+    <div class="contenedor">
+      <div class="relato">
+        <p class="cuenta"><b data-n>1</b> / 3</p>
+        <div class="pasos">
+          <div class="paso"><h2>Usted cobra.</h2><p>Como siempre, en su caja de siempre. No cambia nada de lo que ya hace.</p></div>
+          <div class="paso"><h2>La boleta sale sola.</h2><p>Habu la prepara, la timbra y se la entrega al SII en el momento. Su cliente puede revisarla cuando quiera.</p></div>
+          <div class="paso"><h2>Y sus impuestos se suman solos.</h2><p>Cada venta va llenando su declaración del mes. Cuando llega la fecha, el número ya está listo.</p></div>
+        </div>
       </div>
-      <p class="firma">HECHO EN SANTIAGO DE CHILE</p>
-    </div>
-
-    <div class="instrumento tablero" role="img" aria-label="Ejemplo ilustrativo del tablero de Habu, con datos de demostración">
-      <header><span>HABU · TABLERO</span><span class="demo">DEMOSTRACIÓN</span></header>
-      <div class="kpis">
-        <div class="kpi grande"><span>Ventas de hoy</span><b data-ventas>$ 1.284.600</b><small><i class="sube">▲</i> <span data-docs>96</span> documentos emitidos</small></div>
-        <div class="kpi"><span>IVA del mes</span><b data-iva>$ 3.912.400</b><small>débito menos crédito</small></div>
-        <div class="kpi"><span>PPM del mes</span><b data-ppm>$ 205.900</b><small>pago provisional</small></div>
+      <div class="mesa" aria-hidden="true">
+        <div class="recibo">
+          <p class="local">Su local</p>
+          <p class="linea"><span>2 cafés</span><span>$ 5.600</span></p>
+          <p class="linea"><span>1 torta</span><span>$ 3.900</span></p>
+          <p class="linea total"><span>Total</span><span>$ 9.500</span></p>
+          <div class="timbre"><i></i><span>Recibida por el SII</span></div>
+        </div>
+        <div class="mes">
+          <p>Su declaración de este mes</p>
+          <b data-mes>$ 412.300</b>
+          <div class="barra"><i></i></div>
+          <small>Se va llenando con cada venta</small>
+        </div>
       </div>
-      <div class="f29">
-        <div class="f29-cab"><span>F29 · noviembre</span><span>borrador al día</span></div>
-        <div class="barra"><i data-barra style="width:36%"></i></div>
-        <div class="f29-pie"><span>día 11 de 30</span><span>vence en diciembre</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="calculo" id="impuestos">
+  <div class="contenedor">
+    <h2 class="aparece">Sepa hoy cuánto va a pagar.<br>No el día del vencimiento.</h2>
+    <div class="simulador aparece">
+      <div class="perillas">
+        <label for="ventas">Si este mes vende <output data-ventas-txt>$ 12.000.000</output></label>
+        <input id="ventas" type="range" min="1" max="60" step="0.5" value="12" data-ventas>
+        <label for="compras">y compra <output data-compras-txt>$ 5.000.000</output></label>
+        <input id="compras" type="range" min="0" max="60" step="0.5" value="5" data-compras>
       </div>
-      <ul class="feed" data-feed aria-hidden="true">
-        <li><span class="punto ok"></span><span>Boleta 4.812</span><span>$ 12.900</span><em>aceptada</em></li>
-        <li><span class="punto ok"></span><span>Boleta 4.811</span><span>$ 7.450</span><em>aceptada</em></li>
-        <li><span class="punto ok"></span><span>Factura 318</span><span>$ 184.000</span><em>aceptada</em></li>
-      </ul>
+      <div class="resultado">
+        <p>su IVA del mes sería cerca de</p>
+        <b data-iva>$ 1.117.647</b>
+        <small>Es una cuenta simple, de ejemplo. Habu la hará con sus ventas y compras reales, todos los días.</small>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="acople">
+<section class="formas" id="formas">
   <div class="contenedor">
-    <p class="rotulo aparece">Qué es</p>
-    <h2 class="aparece">Una conexión. Lo demás lo hace Habu.</h2>
-    <p class="entrada aparece">Su punto de venta ya sabe vender. Lo que no debería tener que saber es de folios, timbres, formularios ni plazos. Habu se acopla por detrás y se hace cargo de todo lo tributario.</p>
-    <div class="flujo aparece">
-      <div class="nodo"><span class="n">01</span><h3>Su punto de venta</h3><p>Restaurante, tienda o cualquier sistema que cobre. Le avisa a Habu cada venta.</p></div>
-      <div class="via" aria-hidden="true"><i></i></div>
-      <div class="nodo centro"><span class="n">02</span><h3>Habu</h3><p>Emite el documento, lo registra, suma los impuestos y actualiza su tablero.</p></div>
-      <div class="via" aria-hidden="true"><i></i></div>
-      <div class="nodo"><span class="n">03</span><h3>SII</h3><p>Recibe cada documento firmado. La respuesta queda guardada completa.</p></div>
+    <h2 class="aparece">Dos maneras de usarlo.<br>Elija la suya.</h2>
+    <div class="selector aparece" role="tablist" aria-label="Maneras de usar Habu">
+      <button role="tab" aria-selected="true" aria-controls="forma-caja" id="tab-caja" data-forma="caja">Con su caja</button>
+      <button role="tab" aria-selected="false" aria-controls="forma-archivo" id="tab-archivo" data-forma="archivo" tabindex="-1">Con un archivo</button>
+    </div>
+    <div class="forma aparece" id="forma-caja" role="tabpanel" aria-labelledby="tab-caja">
+      <p class="grande">Su sistema de ventas le avisa a Habu, y listo.</p>
+      <p>Sirve para restaurantes, tiendas, talleres y cualquier negocio que atienda público. Usted sigue usando su caja; Habu trabaja por detrás, sin que nadie lo note.</p>
+      <div class="hilo" aria-hidden="true"><span>Su caja</span><i></i><span class="yo">Habu</span><i></i><span>SII</span></div>
+    </div>
+    <div class="forma aparece" id="forma-archivo" role="tabpanel" aria-labelledby="tab-archivo" hidden>
+      <p class="grande">¿Muchas boletas de una vez? Suba su planilla.</p>
+      <p>Sin conectar nada. Usted sube un archivo con sus ventas y Habu emite todas las boletas, una por una, y le avisa si alguna necesita revisión.</p>
+      <div class="buzon" data-buzon tabindex="0" role="button" aria-label="Probar la carga de un archivo de ejemplo">
+        <p class="buzon-txt" data-buzon-txt>Arrastre aquí cualquier archivo, o toque para probar con un ejemplo</p>
+        <b class="buzon-n" data-buzon-n></b>
+        <div class="barra"><i data-buzon-barra></i></div>
+      </div>
+      <p class="letra">Esto es una demostración: su archivo no se lee ni se envía a ninguna parte.</p>
     </div>
   </div>
 </section>
 
-<section id="modulos">
+<section class="estado" id="estado">
   <div class="contenedor">
-    <p class="rotulo aparece">Módulos</p>
-    <h2 class="aparece">Cuatro piezas que trabajan como una.</h2>
-    <p class="entrada aparece">Todo sale de la misma fuente: los documentos emitidos. Por eso los números del tablero, del libro y del formulario siempre calzan.</p>
-    <div class="modulos">
-      <article class="modulo aparece">
-        <div class="mod-cab"><code>EMISIÓN</code><span class="estado curso">En certificación</span></div>
-        <h3>Documentos tributarios</h3>
-        <p>Boletas, facturas, notas de crédito y de débito, con su timbre electrónico, su versión impresa y la consulta pública para quien la recibe.</p>
-        <ul><li>Boletas afectas y exentas</li><li>Facturas y notas</li><li>Libros de compras y ventas</li></ul>
-      </article>
-      <article class="modulo aparece">
-        <div class="mod-cab"><code>IMPUESTOS</code><span class="estado">En hoja de ruta</span></div>
-        <h3>Cerebro tributario</h3>
-        <p>El IVA, el PPM y el borrador del F29 calculados día a día desde los mismos documentos. Y avisos antes de cada vencimiento, no después.</p>
-        <ul><li>IVA débito y crédito</li><li>PPM</li><li>Borrador del F29 y avisos</li></ul>
-      </article>
-      <article class="modulo aparece">
-        <div class="mod-cab"><code>EN VIVO</code><span class="estado">En hoja de ruta</span></div>
-        <h3>Datos en vivo</h3>
-        <p>Cuánto se vendió hoy, cuánto impuesto va acumulado y en qué estado está cada documento. Sin esperar el cierre del mes para enterarse.</p>
-        <ul><li>Ventas al minuto</li><li>Impuestos acumulados</li><li>Estado de cada documento</li></ul>
-      </article>
-      <article class="modulo aparece">
-        <div class="mod-cab"><code>ACOPLE</code><span class="estado">En hoja de ruta</span></div>
-        <h3>Conexión para sistemas de venta</h3>
-        <p>Una sola puerta de entrada para que cualquier punto de venta emita y consulte, sin construir su propia facturación.</p>
-        <ul><li>Una conexión, todos los documentos</li><li>Respuestas claras, no códigos sueltos</li><li>El mismo motor para cada producto</li></ul>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section id="quien">
-  <div class="contenedor">
-    <p class="rotulo aparece">Para quién</p>
-    <h2 class="aparece">Hecho para acoplarse a quien vende.</h2>
-    <p class="entrada aparece">Habu no es una caja registradora ni una pantalla de ventas. Es lo que va debajo.</p>
-    <div class="piezas">
-      <article class="pieza aparece"><code>MESAS · COCINA</code><h3>Restaurantes</h3><p>La cuenta se cierra en la mesa y la boleta sale sola, con la propina y los descuentos bien tratados.</p></article>
-      <article class="pieza aparece"><code>CAJA · MESÓN</code><h3>Tiendas</h3><p>Boleta o factura en el mismo cobro, devoluciones con su nota de crédito y el día cuadrado al cierre.</p></article>
-      <article class="pieza aparece"><code>A MEDIDA</code><h3>Otros sistemas de venta</h3><p>Si su sistema cobra, puede acoplarse. Habu pone lo tributario; usted, su producto.</p></article>
-    </div>
-  </div>
-</section>
-
-<section id="reglas">
-  <div class="contenedor">
-    <p class="rotulo aparece">Cómo trabaja</p>
-    <h2 class="aparece">Cuatro reglas que el motor no rompe.</h2>
-    <p class="entrada aparece">Con impuestos no existe el «casi». Habu está construido para detenerse antes de equivocarse y para dejar escrito todo lo que pasó.</p>
-    <div class="reglas">
-      <article class="regla aparece"><span class="n">01</span><h3>Un folio, una vida.</h3><p>Cada folio se usa una sola vez. Si el SII lo rechaza, el rechazo queda registrado: no se tapa con otro número.</p></article>
-      <article class="regla aparece"><span class="n">02</span><h3>Lo firmado es lo enviado.</h3><p>El documento se firma, se cierra y viaja tal como quedó. Un reintento manda exactamente lo mismo.</p></article>
-      <article class="regla aparece"><span class="n">03</span><h3>Nadie se revisa a sí mismo.</h3><p>Antes de salir, cada firma y cada timbre pasan por un verificador independiente del motor.</p></article>
-      <article class="regla aparece"><span class="n">04</span><h3>Una sola fuente.</h3><p>Los libros, los impuestos y el tablero se calculan desde los documentos emitidos, no desde una cuenta paralela.</p></article>
-    </div>
-  </div>
-</section>
-
-<section id="bitacora">
-  <div class="contenedor">
-    <p class="rotulo aparece">Estado</p>
-    <h2 class="aparece">Dónde estamos, sin adornos.</h2>
-    <p class="entrada aparece">Habu se está construyendo por etapas y cada etapa se mide con el Servicio de Impuestos Internos antes de darla por buena.</p>
-    <div class="bitacora aparece">
-      <div class="fila"><time datetime="2026-11-10">10 nov 2026</time><div><strong>Boleta electrónica</strong><small>Set de pruebas revisado por el SII en el ambiente de certificación: «Set de prueba correcto».</small></div><span class="estado ok">Aprobado</span></div>
-      <div class="fila"><span class="cuando">En curso</span><div><strong>Factura, nota de crédito y nota de débito</strong><small>Documentos, libros e impresión construidos. En proceso con el SII.</small></div><span class="estado curso">En proceso</span></div>
-      <div class="fila"><span class="cuando">Después</span><div><strong>Impuestos, datos en vivo y conexión para puntos de venta</strong><small>Diseñados como parte de Habu. Todavía no están construidos.</small></div><span class="estado">Hoja de ruta</span></div>
-      <div class="fila"><span class="cuando">Después</span><div><strong>Emisión en producción</strong><small>Habu todavía no emite documentos reales. Cuando lo haga, se dirá aquí.</small></div><span class="estado">Pendiente</span></div>
-    </div>
-    <p class="nota aparece">El tablero de la portada es un ejemplo ilustrativo con datos de demostración. El SII autoriza a cada empresa emisora, no a un programa; lo que aquí se informa corresponde a Blackbird Tech SpA.</p>
+    <h2 class="aparece">En qué va Habu, sin adornos.</h2>
+    <p class="grande aparece">Estamos en el proceso oficial de certificación ante el Servicio de Impuestos Internos.</p>
+    <ul class="hitos aparece">
+      <li class="hecho"><span>Boleta electrónica</span><em>Aprobada en las pruebas del SII · 10 nov 2026</em></li>
+      <li class="curso"><span>Factura y notas de crédito</span><em>En revisión</em></li>
+      <li><span>Impuestos al día, conexión con cajas y carga de archivos</span><em>En construcción</em></li>
+      <li><span>Abierto a clientes</span><em>Todavía no. Se avisará aquí.</em></li>
+    </ul>
   </div>
 </section>
 
 <section class="cierre">
   <div class="contenedor">
-    <p class="rotulo aparece" style="justify-content:center">Consulta</p>
-    <h2 class="aparece">¿Recibió una boleta emitida con Habu?</h2>
-    <p class="aparece">Con el folio, la fecha y el monto puede ver su boleta con el timbre electrónico.</p>
-    <a class="boton principal aparece" href="/boleta/">Consultar una boleta</a>
+    <h2 class="aparece">¿Le dieron una boleta hecha con Habu?</h2>
+    <a class="boton aparece" href="/boleta/">Consultarla ahora</a>
   </div>
 </section>
 
@@ -170,8 +137,8 @@
 
 <footer>
   <div class="contenedor">
-    <span>© 2026 Blackbird Tech SpA · Santiago, Chile</span>
-    <span>Habu · motor tributario para puntos de venta</span>
+    <span>© 2026 Blackbird Tech SpA · Santiago de Chile</span>
+    <a href="/boleta/">Consultar una boleta</a>
   </div>
 </footer>
 
