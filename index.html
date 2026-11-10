@@ -102,13 +102,14 @@
     </div>
     <div class="forma aparece" id="forma-archivo" role="tabpanel" aria-labelledby="tab-archivo" hidden>
       <p class="grande">¿Muchas boletas de una vez? Suba su planilla.</p>
-      <p>Sin conectar nada. Usted sube un archivo con sus ventas y Habu emite todas las boletas, una por una, y le avisa si alguna necesita revisión.</p>
-      <div class="buzon" data-buzon tabindex="0" role="button" aria-label="Probar la carga de un archivo de ejemplo">
-        <p class="buzon-txt" data-buzon-txt>Arrastre aquí cualquier archivo, o toque para probar con un ejemplo</p>
-        <b class="buzon-n" data-buzon-n></b>
-        <div class="barra"><i data-buzon-barra></i></div>
+      <p>Sin conectar nada y sin plantillas. Habu entiende su planilla como venga: en Excel o CSV, con las columnas en cualquier orden y con los nombres que usted usa. Pruébelo ahora.</p>
+      <div class="buzon" data-buzon data-servicio="https://boletas.habu.cl/planilla" tabindex="0" role="button" aria-label="Elegir una planilla para que Habu la lea">
+        <input type="file" data-archivo hidden accept=".xlsx,.xls,.csv,.tsv,.txt,.xml,.htm,.html">
+        <p class="buzon-txt" data-buzon-txt>Arrastre aquí su planilla, o toque para elegirla</p>
       </div>
-      <p class="letra">Esto es una demostración: su archivo no se lee ni se envía a ninguna parte.</p>
+      <p class="letra">¿No tiene una a mano? <button class="enlace" type="button" data-ejemplo>Pruebe con una de ejemplo, desordenada a propósito.</button></p>
+      <div class="lectura" data-lectura hidden aria-live="polite"></div>
+      <p class="letra">Habu lee su planilla y le muestra qué entendió. El archivo no se guarda, y desde aquí no se emite ninguna boleta.</p>
     </div>
   </div>
 </section>
@@ -120,7 +121,8 @@
     <ul class="hitos aparece">
       <li class="hecho"><span>Boleta electrónica</span><em>Aprobada en las pruebas del SII · 10 nov 2026</em></li>
       <li class="curso"><span>Factura y notas de crédito</span><em>En revisión</em></li>
-      <li><span>Impuestos al día, conexión con cajas y carga de archivos</span><em>En construcción</em></li>
+      <li class="curso"><span>Lectura de planillas</span><em>Ya puede probarla en esta página</em></li>
+      <li><span>Impuestos al día, conexión con cajas y emisión desde planillas</span><em>En construcción</em></li>
       <li><span>Abierto a clientes</span><em>Todavía no. Se avisará aquí.</em></li>
     </ul>
   </div>

@@ -196,39 +196,85 @@
     });
   });
 
-  // 6. Carga de archivo: solo una demostración. El archivo no se lee ni se envía.
+  // 6. Lectura de una planilla: se sube, Habu responde qué entendió y el archivo se descarta.
   var buzon = uno("[data-buzon]");
   if (buzon) {
-    var texto = uno("[data-buzon-txt]"), numero = uno("[data-buzon-n]"), barra = uno("[data-buzon-barra]");
-    var inicial = texto.textContent;
-    var probar = function () {
-      if (buzon.classList.contains("andando")) return;
-      if (buzon.classList.contains("listo")) {
-        buzon.classList.remove("listo"); texto.textContent = inicial; barra.style.width = "0"; return;
-      }
-      var meta = 800 + Math.round(Math.random() * 900), hechas = 0;
-      buzon.classList.add("andando");
-      numero.textContent = "0";
-      texto.textContent = "Leyendo su planilla…";
-      var paso = function () {
-        hechas = Math.min(meta, hechas + Math.ceil(meta / (quieto ? 1 : 70)));
-        numero.textContent = miles(hechas);
-        barra.style.width = hechas / meta * 100 + "%";
-        if (hechas > meta * 0.12) texto.textContent = "Emitiendo boletas…";
-        if (hechas > meta * 0.8) texto.textContent = "Entregándolas al SII…";
-        if (hechas < meta) return setTimeout(paso, 45);
-        buzon.classList.remove("andando"); buzon.classList.add("listo");
-        texto.textContent = "boletas listas. Así de simple. Toque para repetir.";
-      };
-      setTimeout(paso, 600);
+    var servicio = buzon.getAttribute("data-servicio"), entrada = uno("[data-archivo]");
+    var texto = uno("[data-buzon-txt]"), salida = uno("[data-lectura]"), inicial = texto.textContent;
+    var crear = function (etiqueta, contenido, clase) {
+      var el = document.createElement(etiqueta);
+      if (contenido != null) el.textContent = contenido;
+      if (clase) el.className = clase;
+      return el;
     };
-    buzon.addEventListener("click", probar);
-    buzon.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); probar(); } });
+    var lista = function (titulo, items) {
+      if (!items.length) return;
+      salida.appendChild(crear("h4", titulo));
+      var ul = crear("ul");
+      items.forEach(function (item) { ul.appendChild(crear("li", item)); });
+      salida.appendChild(ul);
+    };
+    var fecha = function (iso) { var p = iso.split("-"); return p[2] + "-" + p[1] + "-" + p[0]; };
+    var mostrar = function (r) {
+      salida.textContent = "";
+      salida.hidden = false;
+      if (!r.ok) {
+        salida.appendChild(crear("p", r.mensaje, "lectura-no"));
+      } else {
+        if (r.boletas) {
+          salida.appendChild(crear("p", "Entendí su planilla. Saldrían"));
+          salida.appendChild(crear("b", miles(r.boletas) + (r.boletas === 1 ? " boleta" : " boletas"), "lectura-n"));
+          var detalle = "por " + pesos(r.suma) + " en total";
+          if (r.desde) detalle += r.desde === r.hasta ? ", del " + fecha(r.desde) : ", del " + fecha(r.desde) + " al " + fecha(r.hasta);
+          salida.appendChild(crear("p", detalle + "."));
+        } else {
+          salida.appendChild(crear("p", "Abrí su archivo, pero todavía no puedo sacar boletas de él.", "lectura-no"));
+        }
+        lista("Esto entendí", r.columnas.map(function (c) { return "«" + c.titulo + "» es " + c.es + "."; }));
+        var supuse = r.supuestos.map(function (t) { return t.charAt(0).toUpperCase() + t.slice(1); });
+        if (r.sin_usar.length) supuse.push("No necesité: " + r.sin_usar.map(function (t) { return "«" + t + "»"; }).join(", ") + ".");
+        lista("Lo que supuse", supuse);
+        var aparte = r.apartadas.map(function (a) { return "Fila " + a.fila + ": " + a.motivo + "."; });
+        if (r.total_apartadas > aparte.length) aparte.push("… y " + (r.total_apartadas - aparte.length) + " más.");
+        lista(r.total_apartadas === 1 ? "Una fila quedó aparte" : r.total_apartadas + " filas quedaron aparte", aparte);
+        lista("Para seguir, necesito saber", r.preguntas);
+        salida.appendChild(crear("p", r.limpia
+          ? "Esta planilla está lista. La emisión desde la web se abrirá junto con las cuentas de cliente."
+          : "Nada se emite a medias: con esto resuelto, la planilla quedaría lista.", "lectura-fin"));
+      }
+      buzon.classList.remove("andando");
+      texto.textContent = "Probar con otra planilla";
+    };
+    var subir = function (archivo) {
+      if (!archivo || buzon.classList.contains("andando")) return;
+      if (archivo.size > 5000000) return mostrar({ ok: false, mensaje: "El archivo pesa más de 5 MB. Para probar, suba uno más chico." });
+      buzon.classList.add("andando");
+      salida.hidden = true;
+      texto.textContent = "Leyendo «" + (archivo.name || "su planilla") + "»…";
+      fetch(servicio, { method: "POST", body: archivo, headers: { "Content-Type": "application/octet-stream" } })
+        .then(function (respuesta) { return respuesta.json(); })
+        .then(mostrar)
+        .catch(function () { mostrar({ ok: false, mensaje: "No pude conectarme con Habu en este momento. Intente en un rato." }); });
+    };
+    buzon.addEventListener("click", function () { if (!buzon.classList.contains("andando")) entrada.click(); });
+    buzon.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); entrada.click(); } });
+    entrada.addEventListener("click", function (e) { e.stopPropagation(); });
+    entrada.addEventListener("change", function () { subir(entrada.files[0]); entrada.value = ""; });
     ["dragenter", "dragover"].forEach(function (n) {
       buzon.addEventListener(n, function (e) { e.preventDefault(); buzon.classList.add("encima"); });
     });
     buzon.addEventListener("dragleave", function () { buzon.classList.remove("encima"); });
-    buzon.addEventListener("drop", function (e) { e.preventDefault(); buzon.classList.remove("encima"); probar(); });
+    buzon.addEventListener("drop", function (e) {
+      e.preventDefault(); buzon.classList.remove("encima");
+      subir(e.dataTransfer && e.dataTransfer.files[0]);
+    });
+    var ejemplo = uno("[data-ejemplo]");
+    if (ejemplo) ejemplo.addEventListener("click", function () {
+      var planilla = "Café Central;;;\nVentas de la semana;;;\n;;;\nDescripción;Fecha Emisión;Monto;Vendedor\n" +
+        "Café;03/11/26;$ 5.600;Ana\nTorta;03/11/26;$ 3.900;Ana\nAlmuerzo;04/11/26;$ 22.500;Luis\n" +
+        "Té;04/11/26;12,000;Luis\nJugo natural;15/11/26;$ 12.900;Ana\nTOTAL;;$ 56.900;\n";
+      subir(new File([planilla], "ventas de ejemplo.csv", { type: "text/csv" }));
+    });
   }
 
   // 7. Consulta de boleta: el formulario solo se habilita si hay un servicio configurado.
