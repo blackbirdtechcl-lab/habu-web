@@ -26,8 +26,8 @@
     var sueltas = [], enFila = [], porSalir = 0, pulso = 0, puertaX = 0, lineaY = 0, paso = 34, ritmo = 1.15;
     var raton = { x: -999, y: -999 };
     var TINTA = "11,16,32", FUEGO = "255,74,28";
-    var avion = window.Path2D ? new Path2D("M32 6 40 34 58 48 40 46 36 58H28L24 46 6 48 24 34Z") : null;
-    var punta = window.Path2D ? new Path2D("M32 6 35.5 34H28.5Z") : null;
+    // Timbre de Habu: un visto que marca cada boleta como lista.
+    var visto = window.Path2D ? new Path2D("M17 33 28 44 47 22") : null;
 
     var suelta = function (x) {
       // Nacen arriba o abajo del texto, nunca encima: así el titular se lee limpio.
@@ -114,10 +114,10 @@
       }
       ctx.fillStyle = "#FAFAF7"; ctx.beginPath(); ctx.arc(puertaX, lineaY, 20, 0, 6.283); ctx.fill();
       ctx.strokeStyle = "rgba(" + TINTA + ",.9)"; ctx.lineWidth = 1.5; ctx.stroke();
-      if (avion) {
-        ctx.save(); ctx.translate(puertaX, lineaY); ctx.rotate(Math.PI / 2); ctx.scale(0.42, 0.42); ctx.translate(-32, -32);
-        ctx.fillStyle = "rgb(" + TINTA + ")"; ctx.fill(avion);
-        ctx.fillStyle = "rgb(" + FUEGO + ")"; ctx.fill(punta);
+      if (visto) {
+        ctx.save(); ctx.translate(puertaX, lineaY); ctx.scale(0.42, 0.42); ctx.translate(-32, -32);
+        ctx.strokeStyle = "rgb(" + FUEGO + ")"; ctx.lineWidth = 7; ctx.lineCap = "round"; ctx.lineJoin = "round";
+        ctx.stroke(visto);
         ctx.restore();
       }
       rotulo("Habu las ordena", puertaX, lineaY + 40, "center", true);
