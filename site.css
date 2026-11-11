@@ -184,3 +184,19 @@ footer .contenedor{display:flex;flex-wrap:wrap;gap:.8rem 2rem;justify-content:sp
   .pasos{gap:2.5rem}.paso{grid-area:auto;opacity:1;transform:none}
   .timbre,.mes{opacity:1;transform:none}.cuenta,.pista{display:none}
 }
+
+/* Página de conexión */
+.hoja.ancha{max-width:46rem}
+.hoja h2{font-size:1.25rem;letter-spacing:-.02em;margin:2.6rem 0 .8rem}
+.aviso.visible{display:block}
+pre.codigo{background:var(--tinta);color:var(--papel);border-radius:.8rem;padding:1rem 1.1rem;margin:.7rem 0 .3rem;font:500 .82rem/1.6 ui-monospace,"SF Mono",Menlo,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+.pasos-doc{padding-left:1.2rem;display:grid;gap:1.2rem}
+.pasos-doc li::marker{font-weight:800}
+.tabla-doc{display:grid;border-top:1px solid var(--raya)}
+.tabla-doc div{display:grid;grid-template-columns:13rem 1fr;gap:.2rem 1.2rem;padding:.85rem 0;border-bottom:1px solid var(--raya)}
+.tabla-doc code{font:500 .82rem ui-monospace,"SF Mono",Menlo,Consolas,monospace;overflow-wrap:anywhere}
+.tabla-doc span{grid-column:2;color:var(--tinta-2);font-size:.92rem}
+.garantias{list-style:none;padding:0;display:grid;gap:.9rem}
+.garantias li{padding-left:1.1rem;border-left:2px solid var(--fuego)}
+.hoja.ancha>.boton{margin-top:2.4rem}
+@media (max-width:46rem){.tabla-doc div{grid-template-columns:1fr}.tabla-doc span{grid-column:1}}
