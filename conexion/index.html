@@ -32,7 +32,7 @@
   <div class="hoja ancha">
     <h1>Su sistema manda la venta.<br>Habu devuelve la boleta.</h1>
     <p>Habu se conecta a la caja o al sistema de ventas que usted ya usa. No hay que cambiarlo: solo enseñarle a pedirle la boleta a Habu.</p>
-    <p class="aviso visible">La conexión ya funciona y fue medida con el Servicio de Impuestos Internos en su ambiente de pruebas. Por ahora se entrega por invitación.</p>
+    <p class="aviso visible">La conexión ya funciona con boletas reales: desde el 11 de noviembre de 2026 un sistema de ventas emite por Habu y el Servicio de Impuestos Internos las recibe. Por ahora se entrega por invitación.</p>
 
     <h2>En tres pasos</h2>
     <ol class="pasos-doc">
@@ -48,8 +48,8 @@ Authorization: Bearer SU_LLAVE
     {"nombre": "Almuerzo del día", "cantidad": 2, "precio": 7900}
   ]
 }</pre></li>
-      <li><b>Habu responde con el folio</b> y envía la boleta al SII.
-        <pre class="codigo">{"ok": true, "operacion": "venta-1001", "tipo": 39, "folio": 1524, "total": 15800, "estado": "emitida"}</pre>
+      <li><b>Habu responde con el folio</b> y con el IVA ya calculado. La boleta viaja al SII cuando su sistema lo pide.
+        <pre class="codigo">{"ok": true, "operacion": "venta-1001", "tipo": 39, "folio": 1524, "total": 15800, "neto": 13277, "iva": 2523, "estado": "emitida"}</pre>
         <span class="letra">Respuesta de demostración.</span></li>
     </ol>
 
@@ -57,6 +57,7 @@ Authorization: Bearer SU_LLAVE
     <div class="tabla-doc">
       <div><b>Emitir una boleta</b><code>POST /v1/boletas</code><span>Boleta o boleta exenta, de 1 a 20 ítems.</span></div>
       <div><b>Emitir muchas de una vez</b><code>POST /v1/boletas/lote</code><span>Hasta 500 boletas en un pedido.</span></div>
+      <div><b>Enviar al SII</b><code>POST /v1/despacho</code><span>Envía lo emitido y trae la respuesta del SII.</span></div>
       <div><b>Saber cómo le fue</b><code>GET /v1/boletas/venta-1001</code><span>Emitida, enviada, recibida por el SII, con reparo o rechazada, con el motivo.</span></div>
       <div><b>Bajar la boleta</b><code>GET /v1/boletas/venta-1001.pdf</code><span>El PDF con su timbre, o el XML firmado.</span></div>
       <div><b>Folios</b><code>GET /v1/folios</code><span>Cuántos le quedan.</span></div>
@@ -67,7 +68,7 @@ Authorization: Bearer SU_LLAVE
     <ul class="garantias">
       <li><b>Una venta, una boleta.</b> Si su sistema manda la misma venta dos veces, por un corte o por una duda, Habu devuelve la misma boleta. Nunca dos.</li>
       <li><b>Cada sistema con su llave.</b> Una llave sirve para una sola empresa, y se puede cortar al instante.</li>
-      <li><b>Si el SII se cae, usted sigue vendiendo.</b> Habu entrega el folio de inmediato y envía la boleta en cuanto el SII vuelve. Nada se pierde ni se duplica.</li>
+      <li><b>Si el SII se cae, usted sigue vendiendo.</b> Habu entrega el folio de inmediato y la boleta espera hasta que el SII vuelva. Nada se pierde ni se duplica.</li>
     </ul>
 
     <h2>Lo que todavía no hace</h2>
