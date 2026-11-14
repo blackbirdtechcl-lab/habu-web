@@ -5,21 +5,20 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Habu — Usted vende. Habu hace los papeles.</title>
 <meta name="description" content="Boletas, facturas e impuestos al día para su negocio. Habu se conecta a su caja o recibe su planilla, y se entiende con el SII por usted.">
-<meta name="theme-color" content="#0B1020">
+<meta name="theme-color" content="#070B24">
 <meta property="og:title" content="Habu — Usted vende. Habu hace los papeles.">
 <meta property="og:description" content="Boletas, facturas e impuestos al día para su negocio. Habu se conecta a su caja o recibe su planilla, y se entiende con el SII por usted.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://habu.cl/">
 <link rel="canonical" href="https://habu.cl/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="/site.css?v=20261113b">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/site.css?v=20261113d">
 </head>
-<body class="viva">
-<div id="punto" aria-hidden="true"></div>
+<body>
 <header class="cabecera">
   <div class="contenedor">
-    <a class="marca" href="/" aria-label="Habu, inicio"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 6 40 34 58 48 40 46 36 58H28L24 46 6 48 24 34Z" fill="currentColor"/><path d="M32 6 35.500 34H28.500Z" fill="#ff4a1c"/></svg>HABU</a>
+    <a class="marca" href="/" aria-label="Habu, inicio"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 6 40 34 58 48 40 46 36 58H28L24 46 6 48 24 34Z" fill="currentColor"/><path d="M32 6 35.500 34H28.500Z" fill="#2238ff"/></svg>Habu</a>
     <nav class="nav" aria-label="Principal">
       <a href="/#como">Cómo funciona</a>
       <a href="/conexion/">Conexión</a>
@@ -31,139 +30,173 @@
 
 <main>
 
-<section class="portada">
-  <canvas id="timbre" aria-hidden="true"></canvas>
-  <h1 class="titulo" aria-label="Habu. Usted vende, Habu hace los papeles."><span data-l="H">H</span><span data-l="A">A</span><span data-l="B">B</span><span data-l="U">U</span></h1>
-  <div class="bajada">
-    <p>Usted vende.<br>Habu hace <i>los papeles.</i></p>
-    <a class="boton gordo" href="https://cuenta.habu.cl/" data-iman>
-      <span>Probar gratis<small>30 días · 250 documentos de demostración</small></span>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7"/></svg>
-    </a>
-  </div>
-</section>
+<section class="maquina" id="como" data-maquina data-paso="0">
+  <div class="escena">
+    <canvas aria-hidden="true"></canvas>
 
-<div class="cinta" aria-hidden="true"><div><span>Boletas</span><em>✦</em><span>Folios</span><em>✦</em><span>Impuestos</span><em>✦</em><span>El SII, resuelto</span><em>✦</em><span>Con su caja</span><em>✦</em><span>O con su planilla</span><em>✦</em><span>Boletas</span><em>✦</em><span>Folios</span><em>✦</em><span>Impuestos</span><em>✦</em><span>El SII, resuelto</span><em>✦</em><span>Con su caja</span><em>✦</em><span>O con su planilla</span><em>✦</em></div></div>
-<div class="cinta b" aria-hidden="true"><div><span>Restaurantes</span><span>·</span><span>Tiendas</span><span>·</span><span>Cafés</span><span>·</span><span>Talleres</span><span>·</span><span>Peluquerías</span><span>·</span><span>Almacenes</span><span>·</span><span>Restaurantes</span><span>·</span><span>Tiendas</span><span>·</span><span>Cafés</span><span>·</span><span>Talleres</span><span>·</span><span>Peluquerías</span><span>·</span><span>Almacenes</span><span>·</span></div></div>
-
-<section class="meson" id="como">
-  <div class="sube">
-    <h2 class="sube">Cobre. <span class="hueco">Timbre.</span></h2>
-    <p class="nota">Pruébelo aquí mismo: agregue ventas y timbre la boleta. Eso hace Habu detrás de su caja, cada vez que usted cobra, y de paso va sumando sus impuestos del mes. (Es una demostración: esta boleta no vale ante el SII.)</p>
-    <div class="teclas" id="teclas">
-      <button type="button" data-p="Café|2800">+ Café</button>
-      <button type="button" data-p="Almuerzo del día|7900">+ Almuerzo</button>
-      <button type="button" data-p="Torta|3900">+ Torta</button>
-      <button type="button" data-p="Jugo natural|3200">+ Jugo</button>
-      <button type="button" data-p="Sándwich|5500">+ Sándwich</button>
-      <button type="button" class="timbrar" id="timbrar">Timbrar</button>
-    </div>
-    <div class="contador" aria-live="polite">
-      <div><span>IVA de su mes · demostración</span><b id="ivaMes">$ 0</b></div>
-      <div><span>Boletas timbradas</span><b id="nBoletas">0</b></div>
-    </div>
-  </div>
-  <div class="impresora sube" aria-hidden="true">
-    <div class="papel" id="papel">
-      <h3>Su local</h3>
-      <div class="sub">BOLETA ELECTRÓNICA · DEMOSTRACIÓN</div>
-      <ul id="lineas"></ul>
-      <div class="total"><span>TOTAL</span><span id="total">$ 0</span></div>
-      <div class="iva"><span>IVA incluido</span><span id="ivaBoleta">$ 0</span></div>
-      <canvas id="codigo" width="600" height="148"></canvas>
-      <div class="pie">Timbre de demostración · sin valor tributario</div>
-      <div class="sello">Timbrada</div>
-    </div>
-  </div>
-</section>
-
-<section class="planilla claro" id="planilla">
-  <h2 class="sube">Suelte su <span class="hueco">planilla.</span></h2>
-  <div class="dosmitades">
-    <div class="sube">
-      <p class="grande">¿Muchas ventas de una vez? Sin conectar nada y sin plantillas. Habu entiende su planilla como venga: Excel o CSV, con las columnas en cualquier orden y con los nombres que usted usa.</p>
-      <p class="nota">Esto no es demostración: es el lector de verdad. Habu lee su planilla y le dice qué entendió. El archivo no se guarda, y desde aquí no se emite ninguna boleta.</p>
-      <p class="letra">¿No tiene una a mano? <button class="enlace" type="button" data-ejemplo>Pruebe con una de ejemplo, desordenada a propósito.</button></p>
-    </div>
-    <div class="sube">
-      <div class="buzon" data-buzon data-servicio="https://boletas.habu.cl/planilla" tabindex="0" role="button" aria-label="Elegir una planilla para que Habu la lea">
-        <input type="file" data-archivo hidden accept=".xlsx,.xls,.csv,.tsv,.txt,.xml,.htm,.html">
-        <p class="buzon-txt" data-buzon-txt>Arrástrela aquí</p>
-        <small>o toque para elegirla · hasta 5 MB</small>
+    <div class="paso" data-k="0">
+      <div class="portada-txt">
+        <h1><span>Usted vende.</span><span>Habu hace los papeles.</span></h1>
+        <p class="sub">Las ventas llegan como llegan: de la caja, de una planilla, a cualquier hora.</p>
+        <div class="acciones">
+          <a class="boton claro grande" href="https://cuenta.habu.cl/">Probar gratis <span class="flecha" aria-hidden="true">→</span></a>
+          <span>30 días · 250 documentos de demostración</span>
+        </div>
       </div>
-      <div class="lectura" data-lectura hidden aria-live="polite"></div>
+    </div>
+
+    <div class="paso" data-k="1">
+      <div class="texto">
+        <p class="rotulo"><b>01</b> Ordena</p>
+        <h2>Cada venta, su boleta.</h2>
+        <p>Con su folio, su timbre y su copia. Todas iguales, todas en regla, sin que usted haga nada.</p>
+        <p class="pista">Pase el cursor y trate de desordenarlas.</p>
+      </div>
+    </div>
+
+    <div class="paso" data-k="2">
+      <div class="texto">
+        <p class="rotulo"><b>02</b> Entrega</p>
+        <h2>El SII las recibe.</h2>
+        <p>Habu las envía y a los dos minutos pregunta solo por la respuesta. Usted no espera ni revisa.</p>
+        <div class="marcador" aria-hidden="true">
+          <div><span>Recibidas · demostración</span><b data-recibidas>0</b></div>
+          <div><span>Rechazadas</span><b>0</b></div>
+          <small>En la vida real van 1.388 boletas recibidas por el SII y ninguna rechazada, al 13 de noviembre de 2026.</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="paso" data-k="3">
+      <div class="texto">
+        <p class="rotulo"><b>03</b> Suma</p>
+        <h2>Y sus impuestos se suman solos.</h2>
+        <p>Cada boleta va llenando la cuenta del mes. Cuando llega la fecha, el número ya está.</p>
+        <div class="marcador" aria-hidden="true">
+          <div><span>IVA de su mes · demostración</span><b data-suma>$ 0</b></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="riel" role="group" aria-label="Pasos">
+      <button type="button" data-ir="0"><b>00</b>Usted vende</button>
+      <button type="button" data-ir="1"><b>01</b>Habu ordena</button>
+      <button type="button" data-ir="2"><b>02</b>El SII recibe</button>
+      <button type="button" data-ir="3"><b>03</b>Se suma</button>
     </div>
   </div>
 </section>
 
-<section class="calculo encendido" id="impuestos">
-  <h2 class="sube">Sepa hoy cuánto <span class="hueco">va a pagar.</span></h2>
-  <p class="nota sube">No el día del vencimiento. Mueva las perillas.</p>
-  <div class="simulador sube">
-    <div class="perillas">
-      <label for="ventas">Si este mes vende <output data-ventas-txt>$ 12.000.000</output></label>
-      <input id="ventas" type="range" min="1" max="60" step="0.5" value="12" data-ventas>
-      <label for="compras">y compra <output data-compras-txt>$ 5.000.000</output></label>
-      <input id="compras" type="range" min="0" max="60" step="0.5" value="5" data-compras>
-    </div>
-    <div class="resultado">
-      <p>Su IVA del mes sería cerca de</p>
-      <b data-iva>$ 1.117.647</b>
-      <small>Es una cuenta simple, de ejemplo. Habu la hace con sus ventas y compras reales, todos los días.</small>
+<section class="seccion" id="planilla">
+  <div class="adentro">
+    <h2 data-ordenar>Su planilla, como venga.</h2>
+    <p class="bajada entra">¿Muchas ventas de una vez? Sin conectar nada y sin plantillas. Habu entiende su planilla con las columnas en cualquier orden y con los nombres que usted usa.</p>
+    <div class="dos">
+      <div class="entra">
+        <div class="hoja-demo" data-hoja aria-label="Planilla de ejemplo, desordenada a propósito">
+          <div class="fila ruido" data-fila="1"><span>Café Central</span><span></span><span></span><span></span></div>
+          <div class="fila ruido" data-fila="2"><span>Ventas de la semana</span><span></span><span></span><span></span></div>
+          <div class="fila cab" data-fila="4"><span>Descripción</span><span>Fecha Emisión</span><span>Monto</span><span>Vendedor</span></div>
+          <div class="fila" data-fila="5"><span>Café</span><span>03/11/26</span><span>$ 5.600</span><span>Ana</span></div>
+          <div class="fila" data-fila="6"><span>Torta</span><span>03/11/26</span><span>$ 3.900</span><span>Ana</span></div>
+          <div class="fila" data-fila="7"><span>Almuerzo</span><span>04/11/26</span><span>$ 22.500</span><span>Luis</span></div>
+          <div class="fila" data-fila="8"><span>Té</span><span>04/11/26</span><span>12,000</span><span>Luis</span></div>
+          <div class="fila" data-fila="9"><span>Jugo natural</span><span>15/11/26</span><span>$ 12.900</span><span>Ana</span></div>
+          <div class="fila ruido" data-fila="10"><span>TOTAL</span><span></span><span>$ 56.900</span><span></span></div>
+        </div>
+        <div class="hoja-pie">
+          <button class="boton" type="button" data-ejemplo>Que Habu la ordene <span class="flecha" aria-hidden="true">→</span></button>
+        </div>
+        <div class="buzon" data-buzon data-servicio="https://boletas.habu.cl/planilla" tabindex="0" role="button" aria-label="Elegir una planilla suya para que Habu la lea">
+          <input type="file" data-archivo hidden accept=".xlsx,.xls,.csv,.tsv,.txt,.xml,.htm,.html">
+          <p class="buzon-txt" data-buzon-txt>O suelte aquí la suya</p>
+          <small>Excel o CSV · hasta 5 MB · toque para elegirla</small>
+        </div>
+        <p class="fina">Esto no es una demostración: es el lector de verdad. El archivo no se guarda, y desde aquí no se emite ninguna boleta.</p>
+      </div>
+      <div class="entra">
+        <div class="espera" data-espera>Aquí aparece lo que Habu entendió: cuántas boletas saldrían, qué columna es cada cosa, qué supuso y qué dejó aparte para preguntarle.</div>
+        <div class="lectura" data-lectura hidden aria-live="polite"></div>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="medido">
-  <h2 class="sube">Medido. <span class="hueco">No prometido.</span></h2>
-  <p class="nota sube">Nada de adjetivos. Esto es lo que Habu lleva hecho de verdad, contado al 13 de noviembre de 2026.</p>
-  <div class="medido">
-    <div class="sube"><b data-n="1388">0</b><span>boletas reales recibidas por el SII, con y sin IVA</span></div>
-    <div class="sube"><b class="cero">0</b><span>rechazadas por el SII</span></div>
-    <div class="sube"><b data-n="1000">0</b><span>empresas emitiendo a la vez en el examen interno, todas atendidas</span></div>
-    <div class="sube"><b data-n="2">0</b><span>minutos, y Habu ya le preguntó al SII por su envío. Solo.</span></div>
-  </div>
-</section>
-
-<section class="claro" id="estado">
-  <h2 class="sube">En qué va, <span class="hueco">sin adornos.</span></h2>
-  <p class="nota sube">Habu ya emite boletas reales y se entiende solo con el SII. Lo que sigue es la factura y abrir la puerta a más empresas. Lo que no está, se dice.</p>
-  <div class="filtros sube" role="group" aria-label="Filtrar el estado">
-    <button type="button" data-ver="todo" aria-pressed="true">Todo<b>17</b></button>
-    <button type="button" data-ver="hecho" aria-pressed="false">Hecho<b>12</b></button>
-    <button type="button" data-ver="curso" aria-pressed="false">En curso<b>3</b></button>
-    <button type="button" data-ver="falta" aria-pressed="false">Falta<b>2</b></button>
-  </div>
-  <ul class="hitos sube">
-    <li class="hecho"><i>Hecho</i><span>Boleta electrónica</span><em>Autorizada por el SII · 11 nov 2026</em></li>
-    <li class="hecho"><i>Hecho</i><span>Boletas reales, con y sin IVA</span><em>1.388 recibidas por el SII, ninguna rechazada · desde el 11 nov 2026</em></li>
-    <li class="hecho"><i>Hecho</i><span>Conexión con su sistema de ventas</span><em>Funciona con ventas reales · <a href="/conexion/">ver cómo</a></em></li>
-    <li class="hecho"><i>Hecho</i><span>Folios</span><em>Se piden al SII desde su cuenta</em></li>
-    <li class="hecho"><i>Hecho</i><span>Respuesta del SII sin esperar</span><em>Habu pregunta solo por cada envío y lo deja anotado · 13 nov 2026</em></li>
-    <li class="hecho"><i>Hecho</i><span>Bóveda cifrada para su certificado</span><em>En servicio, en servidor propio · 12 nov 2026</em></li>
-    <li class="hecho"><i>Hecho</i><span>Servidor propio con respaldo diario</span><em>Habu ya no depende de un solo equipo · 12 nov 2026</em></li>
-    <li class="hecho"><i>Hecho</i><span>Prueba de exigencia</span><em>Mil empresas emitiendo a la vez, todas atendidas · examen interno, 12 nov 2026</em></li>
-    <li class="hecho"><i>Hecho</i><span>Boletas desde su planilla</span><em>Habu entiende las columnas por usted · ya puede probarla en esta página</em></li>
-    <li class="hecho"><i>Hecho</i><span>Notas de crédito y de débito</span><em>Recibidas por el SII en pruebas · 12 nov 2026</em></li>
-    <li class="hecho"><i>Hecho</i><span>Compras e IVA del mes</span><em>Leídos del SII en solo lectura, con sus cuadros · 12 nov 2026</em></li>
-    <li class="hecho"><i>Hecho</i><span>Prueba gratis de un mes</span><em>Entre a su cuenta y emita 250 documentos de demostración · 12 nov 2026</em></li>
-    <li class="curso"><i>En curso</i><span>Factura electrónica</span><em>En trámite con el SII</em></li>
-    <li class="curso"><i>En curso</i><span>F29 y avisos de impuestos</span><em>Habu lo propone y lo compara con lo declarado; presentarlo, en construcción</em></li>
-    <li class="curso"><i>En curso</i><span>Notas de crédito reales</span><em>En construcción</em></li>
-    <li class="falta"><i>Falta</i><span>Alta de su empresa ante el SII, guiada</span><em>En construcción</em></li>
-    <li class="falta"><i>Falta</i><span>Emisión real para otras empresas</span><em>Todavía no. Se avisará aquí.</em></li>
-  </ul>
-</section>
-
-<section id="caja">
-  <h2 class="sube">Con su caja. <span class="hueco">Sin cambiarla.</span></h2>
-  <div class="hilo sube" aria-hidden="true"><span>Su caja</span><i></i><span class="yo">Habu</span><i></i><span>SII</span></div>
-  <div class="caja-pie">
-    <div class="sube">
-      <p class="grande">Su sistema de ventas le avisa a Habu, y listo. Sirve para restaurantes, tiendas, talleres y cualquier negocio que atienda público. Usted sigue usando su caja; Habu trabaja por detrás, sin que nadie lo note.</p>
-      <a class="boton linea" href="/conexion/" data-iman>Ver cómo se conecta</a>
+<section class="seccion azul" id="impuestos">
+  <div class="adentro">
+    <h2 class="ancho" data-ordenar>Sepa hoy cuánto va a pagar.</h2>
+    <p class="bajada entra">No el día del vencimiento. Mueva las perillas.</p>
+    <div class="simulador entra">
+      <div class="perillas">
+        <label for="ventas">Si este mes vende <output data-ventas-txt>$ 12.000.000</output></label>
+        <input id="ventas" type="range" min="1" max="60" step="0.5" value="12" data-ventas>
+        <label for="compras">y compra <output data-compras-txt>$ 5.000.000</output></label>
+        <input id="compras" type="range" min="0" max="60" step="0.5" value="5" data-compras>
+      </div>
+      <div class="resultado">
+        <p>Su IVA del mes sería cerca de</p>
+        <b data-iva>$ 1.117.647</b>
+        <small>Es una cuenta simple, de ejemplo. Habu la hace con sus ventas y compras reales, todos los días.</small>
+      </div>
     </div>
-    <pre class="sube" aria-label="Ejemplo de demostración"><b>POST</b> /v1/boletas
+  </div>
+</section>
+
+<section class="seccion" id="medido">
+  <div class="adentro">
+    <h2 data-ordenar>Medido, no prometido.</h2>
+    <p class="bajada entra">Sin adjetivos. Esto es lo que Habu lleva hecho de verdad, contado al 13 de noviembre de 2026.</p>
+    <div class="casillas entra">
+      <div><i>[ 01 ] recibidas</i><b data-n="1388">0</b><span>boletas reales recibidas por el SII, con y sin IVA</span></div>
+      <div><i>[ 02 ] rechazadas</i><b>0</b><span>rechazadas por el SII</span></div>
+      <div><i>[ 03 ] a la vez</i><b data-n="1000">0</b><span>empresas emitiendo a la vez en el examen interno, todas atendidas</span></div>
+      <div><i>[ 04 ] minutos</i><b data-n="2">0</b><span>y Habu ya le preguntó al SII por su envío. Solo.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="seccion noche" id="estado">
+  <div class="adentro">
+    <h2 data-ordenar>En qué va, sin adornos.</h2>
+    <p class="bajada entra">Habu ya emite boletas reales y se entiende solo con el SII. Lo que sigue es la factura y abrir la puerta a más empresas. Lo que no está, se dice.</p>
+    <div class="filtros entra" role="group" aria-label="Filtrar el estado">
+      <button type="button" data-ver="todo" aria-pressed="true">Todo<b>17</b></button>
+      <button type="button" data-ver="hecho" aria-pressed="false">Hecho<b>12</b></button>
+      <button type="button" data-ver="curso" aria-pressed="false">En curso<b>3</b></button>
+      <button type="button" data-ver="falta" aria-pressed="false">Falta<b>2</b></button>
+    </div>
+    <ul class="hitos entra">
+      <li class="hecho"><i aria-label="Hecho"></i><span>Boleta electrónica</span><em>Autorizada por el SII · 11 nov 2026</em></li>
+      <li class="hecho"><i aria-label="Hecho"></i><span>Boletas reales, con y sin IVA</span><em>1.388 recibidas por el SII, ninguna rechazada · desde el 11 nov 2026</em></li>
+      <li class="hecho"><i aria-label="Hecho"></i><span>Conexión con su sistema de ventas</span><em>Funciona con ventas reales · <a href="/conexion/">ver cómo</a></em></li>
+      <li class="hecho"><i aria-label="Hecho"></i><span>Folios</span><em>Se piden al SII desde su cuenta</em></li>
+      <li class="hecho"><i aria-label="Hecho"></i><span>Respuesta del SII sin esperar</span><em>Habu pregunta solo por cada envío y lo deja anotado · 13 nov 2026</em></li>
+      <li class="hecho"><i aria-label="Hecho"></i><span>Bóveda cifrada para su certificado</span><em>En servicio, en servidor propio · 12 nov 2026</em></li>
+      <li class="hecho"><i aria-label="Hecho"></i><span>Servidor propio con respaldo diario</span><em>Habu ya no depende de un solo equipo · 12 nov 2026</em></li>
+      <li class="hecho"><i aria-label="Hecho"></i><span>Prueba de exigencia</span><em>Mil empresas emitiendo a la vez, todas atendidas · examen interno, 12 nov 2026</em></li>
+      <li class="hecho"><i aria-label="Hecho"></i><span>Boletas desde su planilla</span><em>Habu entiende las columnas por usted · ya puede probarla en esta página</em></li>
+      <li class="hecho"><i aria-label="Hecho"></i><span>Notas de crédito y de débito</span><em>Recibidas por el SII en pruebas · 12 nov 2026</em></li>
+      <li class="hecho"><i aria-label="Hecho"></i><span>Compras e IVA del mes</span><em>Leídos del SII en solo lectura, con sus cuadros · 12 nov 2026</em></li>
+      <li class="hecho"><i aria-label="Hecho"></i><span>Prueba gratis de un mes</span><em>Entre a su cuenta y emita 250 documentos de demostración · 12 nov 2026</em></li>
+      <li class="curso"><i aria-label="En curso"></i><span>Factura electrónica</span><em>En trámite con el SII</em></li>
+      <li class="curso"><i aria-label="En curso"></i><span>F29 y avisos de impuestos</span><em>Habu lo propone y lo compara con lo declarado; presentarlo, en construcción</em></li>
+      <li class="curso"><i aria-label="En curso"></i><span>Notas de crédito reales</span><em>En construcción</em></li>
+      <li class="falta"><i aria-label="Falta"></i><span>Alta de su empresa ante el SII, guiada</span><em>En construcción</em></li>
+      <li class="falta"><i aria-label="Falta"></i><span>Emisión real para otras empresas</span><em>Todavía no. Se avisará aquí.</em></li>
+    </ul>
+  </div>
+</section>
+
+<section class="seccion" id="caja">
+  <div class="adentro">
+    <h2 data-ordenar>Con su caja. Sin cambiarla.</h2>
+    <div class="hilo entra" aria-hidden="true"><span>Su caja</span><span class="via antes"><b></b><b></b><b></b><b></b><b></b></span><span class="yo">Habu</span><span class="via despues"><b></b><b></b><b></b><b></b></span><span>SII</span></div>
+    <div class="caja-pie">
+      <div class="entra">
+        <p class="bajada">Su sistema de ventas le avisa a Habu, y listo. Sirve para restaurantes, tiendas, talleres y cualquier negocio que atienda público. Usted sigue usando su caja; Habu trabaja por detrás, sin que nadie lo note.</p>
+        <a class="boton" href="/conexion/">Ver cómo se conecta <span class="flecha" aria-hidden="true">→</span></a>
+      </div>
+      <pre class="entra" aria-label="Ejemplo de demostración"><b>POST</b> /v1/boletas
 { "operacion": "venta-1001",
   "items": [{
     "nombre": "Almuerzo del día",
@@ -174,34 +207,38 @@
     "total": 15800, "iva": 2523,
     "estado": "emitida" }
 <b>//</b> respuesta de demostración</pre>
+    </div>
   </div>
 </section>
 
-<section class="cierre encendido" id="probar">
-  <h2 class="sube">Pruébelo <span class="hueco">un mes.</span></h2>
-  <div class="dosmitades">
-    <div class="sube">
-      <p class="grande">Entre con su cuenta de Google, registre su empresa y emita hasta 250 documentos de demostración en 30 días: a mano o subiendo su planilla. Sin tarjeta.</p>
-      <p class="aun">Los documentos de la prueba no son boletas: no llevan timbre ni salen al SII. La emisión real para otras empresas todavía no está abierta; se avisará aquí.</p>
+<section class="seccion azul cierre" id="probar">
+  <div class="adentro">
+    <h2 data-ordenar>Pruébelo un mes.</h2>
+    <div class="dos">
+      <div class="entra">
+        <p class="bajada">Entre con su cuenta de Google, registre su empresa y emita documentos de demostración: a mano o subiendo su planilla. Sin tarjeta.</p>
+        <a class="boton claro grande" href="https://cuenta.habu.cl/">Entrar y probar <span class="flecha" aria-hidden="true">→</span></a>
+        <p class="aun">Los documentos de la prueba no son boletas: no llevan timbre ni salen al SII. La emisión real para otras empresas todavía no está abierta; se avisará aquí.</p>
+      </div>
+      <div class="plan entra">
+        <div><b data-n="30">0</b><span>días</span></div>
+        <div><b data-n="250">0</b><span>documentos de demostración</span></div>
+      </div>
     </div>
-    <div class="sube">
-      <a class="boton gordo" href="https://cuenta.habu.cl/" data-iman>
-        <span>Entrar y probar<small>30 días · 250 documentos de demostración</small></span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7"/></svg>
-      </a>
-    </div>
+    <a class="consulta entra" href="/boleta/"><span>¿Le dieron una boleta hecha con Habu? Consúltela</span><span aria-hidden="true">→</span></a>
   </div>
-  <a class="consulta sube" href="/boleta/"><span>¿Le dieron una boleta hecha con Habu? Consúltela</span><span aria-hidden="true">→</span></a>
 </section>
 
 </main>
 
-<footer>
-  <b aria-hidden="true">HABU</b>
-  <span>© 2026 Blackbird Tech SpA · Santiago de Chile</span>
-  <span><a href="/privacidad/">Privacidad</a> · <a href="/terminos/">Términos</a> · <a href="/boleta/">Consultar una boleta</a></span>
+<footer class="pie">
+  <div class="nombre" data-nombre aria-hidden="true"></div>
+  <div class="linea">
+    <span>© 2026 Blackbird Tech SpA · Santiago de Chile</span>
+    <span><a href="/privacidad/">Privacidad</a> · <a href="/terminos/">Términos</a> · <a href="/boleta/">Consultar una boleta</a></span>
+  </div>
 </footer>
 
-<script src="/site.js?v=20261113b" defer></script>
+<script src="/site.js?v=20261113d" defer></script>
 </body>
 </html>
